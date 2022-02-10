@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3671875" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_account.xml" value="0.3828125" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_baseline_house_24.xml" value="0.22291666666666668" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_baseline_mail_24.xml" value="0.2916666666666667" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3828125" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_euro.xml" value="0.22291666666666668" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_euro_grey.xml" value="0.22291666666666668" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_home.xml" value="0.1" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3671875" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_location_background.xml" value="0.3671875" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_location_black.xml" value="0.3484375" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_location_foreground.xml" value="0.3671875" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/ic_location_grey.xml" value="0.22291666666666668" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/rounded_button.xml" value="0.22135416666666666" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/drawable/search_bg.xml" value="0.3828125" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout-w936dp/item.xml" value="0.241796875" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_contact.xml" value="0.25" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_listing_details.xml" value="0.25" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_listings_by_category.xml" value="0.17065868263473055" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_loginreg.xml" value="0.27355072463768115" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_new_listing.xml" value="0.35736040609137054" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/category_row.xml" value="0.5" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/image_row.xml" value="0.20572916666666666" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/listings_by_category_row.xml" value="0.5" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/recently_listed_row.xml" value="0.2015625" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/rounded_button.xml" value="0.20520833333333333" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/slider_item.xml" value="0.1734375" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/top_listings_row.xml" value="0.36666666666666664" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/user_listings.xml" value="0.20572916666666666" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/layout/user_listings_row.xml" value="0.20572916666666666" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/menu/menu_public.xml" value="0.29375" />
+        <entry key="..\:/FAKS/PMA/Roofio/app/src/main/res/menu/menu_signed_in.xml" value="0.2755208333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/myListings"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
+        android:title="Messages">
+    </item>
+    <item
+        android:id="@+id/accSignOut"
+        android:icon="@drawable/ic_account"
+        app:showAsAction="never"
+        android:title="Odjavi se"/>
+
+
+</menu>

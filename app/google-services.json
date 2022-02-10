@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "794492597768",
+    "firebase_url": "https://roofio-5c8ff-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "roofio-5c8ff",
+    "storage_bucket": "roofio-5c8ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794492597768:android:fd831502660b26932283bd",
+        "android_client_info": {
+          "package_name": "com.example.roofio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794492597768-hgc31fj2e42g5q9rrupsj17n13k7k8en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeSY765UeeyEZ4kUIFaVpCCx0OA1mFa0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794492597768-hgc31fj2e42g5q9rrupsj17n13k7k8en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

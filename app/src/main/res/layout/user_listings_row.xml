@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutUserListings"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginBottom="8dp"
+    android:outlineAmbientShadowColor="#877777">
+
+    <ImageView
+        android:id="@+id/uaImage"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_home" />
+
+    <Button
+        android:id="@+id/btnDeleteListing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="X"
+        android:textSize="32dp"
+        android:backgroundTint="#FF0000"
+        />
+
+    <Button
+        android:id="@+id/btnUpdateListing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="U"
+        android:textSize="32dp"
+        android:backgroundTint="#0000FF"
+        />
+
+    <TextView
+        android:id="@+id/uaLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lokacija"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/uaImage"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="@+id/uaImage"
+        app:layout_constraintTop_toBottomOf="@+id/uaName" />
+
+    <TextView
+        android:id="@+id/uaPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Cijena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uaName" />
+
+    <TextView
+        android:id="@+id/uaStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Status"
+        app:layout_constraintStart_toStartOf="@+id/uaImage"
+        app:layout_constraintTop_toTopOf="@+id/uaImage" />
+
+    <TextView
+        android:id="@+id/uaName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Naziv"
+        app:layout_constraintStart_toStartOf="@+id/uaImage"
+        app:layout_constraintTop_toBottomOf="@+id/uaImage" />
+
+    <TextView
+        android:id="@+id/uaNumRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Broj soba"
+        app:layout_constraintBottom_toBottomOf="@+id/uaImage"
+        app:layout_constraintEnd_toEndOf="@+id/uaImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
