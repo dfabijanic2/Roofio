@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,10 @@ public class UserListingsAdapter extends RecyclerView.Adapter<UserListingsAdapte
     public UserListingsAdapter(Context context, List<PropertyInfo> userListingsList) {
         this.context = context;
         this.userListingsList = userListingsList;
+    }
+
+    public void setListings(List<PropertyInfo> listings){
+        userListingsList = listings;
     }
 
     @NonNull
@@ -60,7 +65,7 @@ public class UserListingsAdapter extends RecyclerView.Adapter<UserListingsAdapte
 
         TextView location, price, name, status, numRoom;
         ImageView featuredImage;
-        Button btnDelete, btnUpdate;
+        ImageButton btnDelete, btnUpdate;
 
         public UserListingsViewHolder(@NonNull View itemView) {
             super(itemView);

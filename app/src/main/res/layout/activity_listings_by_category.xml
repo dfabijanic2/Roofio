@@ -46,10 +46,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listingsRecycler"
-        android:layout_width="0dp"
-        android:layout_height="694dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/statusSpinner"
+        android:paddingBottom="150dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

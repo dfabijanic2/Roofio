@@ -30,6 +30,10 @@ public class ListingsByCategoryAdapter extends RecyclerView.Adapter<ListingsByCa
         this.listingsByCategoryList = listingsByCategoryList;
     }
 
+    public void setListings(List<PropertyInfo> listings){
+        listingsByCategoryList = listings;
+    }
+
     @NonNull
     @Override
     public ListingsByCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

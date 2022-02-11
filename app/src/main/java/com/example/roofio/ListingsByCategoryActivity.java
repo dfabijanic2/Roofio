@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListingsByCategoryActivity extends AppCompatActivity {
 
@@ -43,7 +44,7 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
 
     RecyclerView listingsByCategoryRecycleView;
     ListingsByCategoryAdapter listingsByCategoryAdapter;
-    List<PropertyInfo> listingsByCategoryList;
+    List<PropertyInfo> listingsByCategoryList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,11 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
         categoryName = findViewById(R.id.categoryNameTextView);
 
         listingsByCategoryRecycleView = findViewById(R.id.listingsRecycler);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingsByCategoryActivity.this, LinearLayoutManager.VERTICAL, false);
+        listingsByCategoryRecycleView.setLayoutManager(layoutManager);
+        listingsByCategoryAdapter = new ListingsByCategoryAdapter(ListingsByCategoryActivity.this, listingsByCategoryList);
+        listingsByCategoryRecycleView.setAdapter(listingsByCategoryAdapter);
 
         if (extras != null) {
             categoryName.setText(extras.getString("categoryName"));
@@ -80,14 +86,18 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
                                                 p.getCijena(),
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
-                                                p.getSlike().get(0)
+                                                p.getSlike().get(0),
+                                                    p.getStatus()
                                             )
                                     )
                                 );
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingsByCategoryActivity.this, LinearLayoutManager.VERTICAL, false);
-                        listingsByCategoryRecycleView.setLayoutManager(layoutManager);
-                        listingsByCategoryAdapter = new ListingsByCategoryAdapter(ListingsByCategoryActivity.this, listingsByCategoryList);
-                        listingsByCategoryRecycleView.setAdapter(listingsByCategoryAdapter);
+                        if(statusSelected != null){
+                            if(!statusSelected.getKey().equals("-1"))
+                                listingsByCategoryList = listingsByCategoryList.stream().filter(l -> l.getStatusId().toString().equals(statusSelected.getKey())).collect(Collectors.toList());
+                        }
+                        listingsByCategoryAdapter.setListings(listingsByCategoryList);
+                        listingsByCategoryAdapter.notifyDataSetChanged();
+
                     }
 
                     @Override
@@ -98,16 +108,22 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
 
         Spinner spinnerStatus = findViewById(R.id.statusSpinner);
 
-        ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.slider_item, codeListManager.getStatuses());
+        List<Status> statuses = new ArrayList<>();
+        statuses.add(new Status("-1", "Sve"));
+        statuses.addAll(codeListManager.getStatuses());
 
-        adapterStatus.setDropDownViewResource(R.layout.spinner_item);
+        ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.spinner_item, statuses);
+
+        adapterStatus.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
         spinnerStatus.setAdapter(adapterStatus);
 
         spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 statusSelected = (Status) parent.getItemAtPosition(position);
+                if(!statusSelected.getKey().equals("-1"))
+                    filterListings(statusSelected.getKey());
             }
 
             @Override
@@ -129,5 +145,11 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void filterListings(String statusKey){
+        List<PropertyInfo> listings = listingsByCategoryList.stream().filter(l -> l.getStatusId().toString().equals(statusKey)).collect(Collectors.toList());
+        listingsByCategoryAdapter.setListings(listings);
+        listingsByCategoryAdapter.notifyDataSetChanged();
     }
 }

@@ -35,7 +35,7 @@ public class UserListingsActivity extends AppCompatActivity {
 
     RecyclerView userListingsRecycleView;
 
-    List<PropertyInfo> userListingsList;
+    List<PropertyInfo> userListingsList = new ArrayList<>();
 
 
     @Override
@@ -53,6 +53,11 @@ public class UserListingsActivity extends AppCompatActivity {
 
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(UserListingsActivity.this, LinearLayoutManager.VERTICAL, false);
+        userListingsRecycleView.setLayoutManager(layoutManager);
+        UserListingsAdapter adapter = new UserListingsAdapter(UserListingsActivity.this, userListingsList);
+        userListingsRecycleView.setAdapter(adapter);
+
         database.child("Nekretnine").orderByChild("oglasivac").equalTo(userKey)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -69,14 +74,13 @@ public class UserListingsActivity extends AppCompatActivity {
                                                 p.getCijena(),
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
-                                                p.getSlike() != null ? p.getSlike().get(0) : ""
+                                                p.getSlike() != null ? p.getSlike().get(0) : "",
+                                                p.getStatus()
                                         )
                                 )
                         );
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(UserListingsActivity.this, LinearLayoutManager.VERTICAL, false);
-                        userListingsRecycleView.setLayoutManager(layoutManager);
-                        UserListingsAdapter adapter = new UserListingsAdapter(UserListingsActivity.this, userListingsList);
-                        userListingsRecycleView.setAdapter(adapter);
+                        adapter.setListings(userListingsList);
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +22,7 @@ import android.widget.Toast;
 import com.example.roofio.adapters.ImageSliderAdapter;
 import com.example.roofio.adapters.RecentlyListedAdapter;
 import com.example.roofio.models.Category;
+import com.example.roofio.models.Image;
 import com.example.roofio.models.Property;
 import com.example.roofio.models.PropertyInfo;
 import com.example.roofio.models.Status;
@@ -71,7 +71,7 @@ public class NewListingActivity extends AppCompatActivity {
     private CodeListManager codeListManager;
     private DatabaseReference database;
     private ArrayList<String> urlStrings;
-    private List<Uri> ImageList = new ArrayList<>();
+    private List<Image> ImageList = new ArrayList<>();
 
     private boolean isAllFieldsChecked = false;
 
@@ -114,7 +114,7 @@ public class NewListingActivity extends AppCompatActivity {
 
 
 
-        ArrayAdapter<Category> adapter= new ArrayAdapter<Category>(this, R.layout.slider_item, codeListManager.getCategories());
+        ArrayAdapter<Category> adapter= new ArrayAdapter<Category>(this, R.layout.spinner_item, codeListManager.getCategories());
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
@@ -134,7 +134,7 @@ public class NewListingActivity extends AppCompatActivity {
 
         Spinner spinnerStatus = findViewById(R.id.spinnerStatus);
 
-        ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.slider_item, codeListManager.getStatuses());
+        ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.spinner_item, codeListManager.getStatuses());
 
         adapterStatus.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
@@ -178,8 +178,15 @@ public class NewListingActivity extends AppCompatActivity {
                         return;
                     }
                     for (int upload_count = 0; upload_count < ImageList.size(); upload_count++) {
-                        Uri IndividualImage = ImageList.get(upload_count);
-                        final StorageReference ImageName = ImageFolder.child("Images" + IndividualImage.getLastPathSegment());
+                        if(!ImageList.get(upload_count).isLocal()){
+                            urlStrings.add(ImageList.get(upload_count).getImageUri().toString());
+                            if (urlStrings.size() == ImageList.size()) {
+                                saveListing(id);
+                            }
+                            continue;
+                        }
+                        Uri IndividualImage = ImageList.get(upload_count).getImageUri();
+                        final StorageReference ImageName = ImageFolder.child(id + IndividualImage.getLastPathSegment());
                             ImageName.putFile(IndividualImage).addOnSuccessListener(
                                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
@@ -292,11 +299,11 @@ public class NewListingActivity extends AppCompatActivity {
                     while (currentImageSlect < countClipData) {
 
                         Uri ImageUri = data.getClipData().getItemAt(currentImageSlect).getUri();
-                        ImageList.add(ImageUri);
+                        ImageList.add(new Image(ImageUri, true));
                         currentImageSlect = currentImageSlect + 1;
                     }
                 } else if(data.getData() != null){
-                    ImageList.add(data.getData());
+                    ImageList.add(new Image(data.getData(), true));
                 }
                 else {
                     Toast.makeText(this, "Please Select Multiple Images", Toast.LENGTH_SHORT).show();
@@ -313,6 +320,10 @@ public class NewListingActivity extends AppCompatActivity {
         database.child("Nekretnine").child(listingKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists())
+                {
+                    return;
+                }
                 prop = snapshot.getValue(Property.class);
                 newTitle.setText(prop.getNaziv());
                 newDesc.setText(prop.getOpisOglasa());
@@ -327,7 +338,7 @@ public class NewListingActivity extends AppCompatActivity {
                 newLocation.setText(prop.getLokacija());
                 newPrice.setText(String.format("%.2f", prop.getCijena()));
 
-                ImageList = prop.getSlike() != null ? prop.getSlike().stream().map(s -> Uri.parse(s)).collect(Collectors.toList()) : new ArrayList<>();
+                ImageList = prop.getSlike() != null ? prop.getSlike().stream().map(s -> new Image(Uri.parse(s), false)).collect(Collectors.toList()) : new ArrayList<>();
 
                 imageSliderAdapter.setImages(ImageList);
                 imageSliderAdapter.notifyDataSetChanged();

@@ -163,7 +163,8 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
                                                 p.getCijena(),
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
-                                                p.getSlike() != null && p.getSlike().size() > 0 ? p.getSlike().get(0) : ""
+                                                p.getSlike() != null && p.getSlike().size() > 0 ? p.getSlike().get(0) : "",
+                                                p.getStatus()
                                         )
                                 )
                         );

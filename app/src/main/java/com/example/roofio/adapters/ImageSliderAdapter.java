@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.roofio.ListingDetailsActivity;
 import com.example.roofio.R;
+import com.example.roofio.models.Image;
 import com.example.roofio.models.PropertyInfo;
 
 import java.util.List;
@@ -24,14 +25,14 @@ import java.util.List;
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder> {
 
     Context context;
-    List<Uri> imageList;
+    List<Image> imageList;
 
-    public ImageSliderAdapter(Context context, List<Uri> imageList) {
+    public ImageSliderAdapter(Context context, List<Image> imageList) {
         this.context = context;
         this.imageList = imageList;
     }
 
-    public void setImages(List<Uri> images){
+    public void setImages(List<Image> images){
         imageList = images;
     }
 
@@ -45,7 +46,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ImageSliderViewHolder holder, int position) {
-        Glide.with(context).load(imageList.get(position)).into(holder.image);
+        Glide.with(context).load(imageList.get(position).getImageUri()).into(holder.image);
     }
 
     @Override

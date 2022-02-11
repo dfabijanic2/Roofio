@@ -7,6 +7,7 @@ public class PropertyInfo {
     String Naziv;
     String Kategorija;
     String Status;
+    Integer StatusId;
     Double Cijena;
     String Lokacija;
     Double BrojSoba;
@@ -15,7 +16,7 @@ public class PropertyInfo {
     public PropertyInfo() {
     }
 
-    public PropertyInfo(String key, String naziv, String kategorija, String status, Double cijena, String lokacija, Double brojSoba, String slika) {
+    public PropertyInfo(String key, String naziv, String kategorija, String status, Double cijena, String lokacija, Double brojSoba, String slika, Integer statusId) {
         Key = key;
         Naziv = naziv;
         Kategorija = kategorija;
@@ -24,6 +25,15 @@ public class PropertyInfo {
         Lokacija = lokacija;
         BrojSoba = brojSoba;
         Slika = slika;
+        StatusId = statusId;
+    }
+
+    public Integer getStatusId() {
+        return StatusId;
+    }
+
+    public void setStatusId(Integer statusId) {
+        StatusId = statusId;
     }
 
     public String getKey() {
