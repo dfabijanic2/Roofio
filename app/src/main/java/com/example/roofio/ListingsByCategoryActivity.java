@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roofio.adapters.ListingsByCategoryAdapter;
-import com.example.roofio.adapters.RecentlyListedAdapter;
-import com.example.roofio.models.Category;
 import com.example.roofio.models.Property;
 import com.example.roofio.models.PropertyInfo;
 import com.example.roofio.models.Status;
@@ -29,8 +29,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +48,9 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
     RecyclerView listingsByCategoryRecycleView;
     ListingsByCategoryAdapter listingsByCategoryAdapter;
     List<PropertyInfo> listingsByCategoryList = new ArrayList<>();
+    List<PropertyInfo> allListings = new ArrayList<>();
+
+    Integer selectedOrder = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +93,16 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
                                                 p.getSlike().get(0),
-                                                    p.getStatus()
+                                                    p.getStatus(),
+                                                    p.getVrijemeKreiranjaOglasa()
                                             )
                                     )
                                 );
+                        allListings = listingsByCategoryList;
                         if(statusSelected != null){
                             if(!statusSelected.getKey().equals("-1"))
                                 listingsByCategoryList = listingsByCategoryList.stream().filter(l -> l.getStatusId().toString().equals(statusSelected.getKey())).collect(Collectors.toList());
+                                orderListings();
                         }
                         listingsByCategoryAdapter.setListings(listingsByCategoryList);
                         listingsByCategoryAdapter.notifyDataSetChanged();
@@ -112,9 +121,9 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
         statuses.add(new Status("-1", "Sve"));
         statuses.addAll(codeListManager.getStatuses());
 
-        ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.spinner_item, statuses);
+        ArrayAdapter<Status> adapterStatus = new ArrayAdapter<Status>(this, R.layout.spinner_item, statuses);
 
-        adapterStatus.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapterStatus.setDropDownViewResource(R.layout.spinner_item);
 
         spinnerStatus.setAdapter(adapterStatus);
 
@@ -122,8 +131,50 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
             @Override
           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 statusSelected = (Status) parent.getItemAtPosition(position);
-                if(!statusSelected.getKey().equals("-1"))
+                if(!statusSelected.getKey().equals("-1")){
                     filterListings(statusSelected.getKey());
+                    orderListings();
+                    listingsByCategoryAdapter.setListings(listingsByCategoryList);
+                    listingsByCategoryAdapter.notifyDataSetChanged();
+                }
+
+                else{
+                    listingsByCategoryList = allListings;
+                    orderListings();
+                    listingsByCategoryAdapter.setListings(listingsByCategoryList);
+                    listingsByCategoryAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        Spinner orderSpinner = findViewById(R.id.orderSpinner);
+
+        List<String> orderBy = new ArrayList<>();
+        orderBy.add( "Najnovije");
+        orderBy.add( "Najstarije");
+        orderBy.add( "Cijena - uzlazno");
+        orderBy.add( "Cijena - silazno");
+
+        ArrayAdapter<String> adapterOrder = new ArrayAdapter<String>(this, R.layout.spinner_item, orderBy);
+
+        adapterOrder.setDropDownViewResource(R.layout.spinner_item);
+
+        orderSpinner.setAdapter(adapterOrder);
+
+
+        orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedOrder = position;
+                orderListings();
+                listingsByCategoryAdapter.setListings(listingsByCategoryList);
+                listingsByCategoryAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -148,8 +199,56 @@ public class ListingsByCategoryActivity extends AppCompatActivity {
     }
 
     private void filterListings(String statusKey){
-        List<PropertyInfo> listings = listingsByCategoryList.stream().filter(l -> l.getStatusId().toString().equals(statusKey)).collect(Collectors.toList());
-        listingsByCategoryAdapter.setListings(listings);
+        listingsByCategoryList = allListings.stream().filter(l -> l.getStatusId().toString().equals(statusKey)).collect(Collectors.toList());
+        listingsByCategoryAdapter.setListings(listingsByCategoryList);
         listingsByCategoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.accSignIn:
+                startActivity(new Intent(ListingsByCategoryActivity.this, LoginActivity.class));
+                break;
+            case R.id.accSignUp:
+                startActivity(new Intent(ListingsByCategoryActivity.this, RegisterActivity.class));
+                break;
+            case R.id.accSignOut:
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+                break;
+            case R.id.myListings:
+                Intent i = new Intent(ListingsByCategoryActivity.this, UserListingsActivity.class);
+                startActivity(i);
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void orderListings(){
+        Comparator<PropertyInfo> comparator = (l1, l2) -> {
+            return LocalDateTime.parse(l1.getVrijemeKreiranjaOglasa()).compareTo(LocalDateTime.parse(l2.getVrijemeKreiranjaOglasa()));
+        };
+
+        Comparator<PropertyInfo> comparatorDesc = (l1, l2) -> {
+            return LocalDateTime.parse(l2.getVrijemeKreiranjaOglasa()).compareTo(LocalDateTime.parse(l1.getVrijemeKreiranjaOglasa()));
+        };
+        switch (selectedOrder){
+            case 0:
+                Collections.sort(listingsByCategoryList, comparatorDesc);
+                break;
+            case 1:
+                Collections.sort(listingsByCategoryList, comparator);
+                break;
+            case 2:
+                listingsByCategoryList.sort(Comparator.comparing(PropertyInfo::getCijena));
+                break;
+            case 3:
+                listingsByCategoryList.sort((l1, l2) -> l2.getCijena().compareTo(l1.getCijena()));
+                break;
+
+        }
+
     }
 }

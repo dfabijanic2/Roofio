@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/searchQuery"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -35,6 +35,7 @@
         android:ems="10"
         android:fontFamily="@font/open_sans"
         android:hint="Pretraži"
+        android:imeOptions="actionSend"
         android:inputType="textPersonName"
         android:paddingStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/searchQuery" />
 
     <TextView
         android:id="@+id/textView4"
@@ -90,8 +91,8 @@
 
     <Button
         android:id="@+id/btnAddListing"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"

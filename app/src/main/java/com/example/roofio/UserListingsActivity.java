@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +77,8 @@ public class UserListingsActivity extends AppCompatActivity {
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
                                                 p.getSlike() != null ? p.getSlike().get(0) : "",
-                                                p.getStatus()
+                                                p.getStatus(),
+                                                p.getVrijemeKreiranjaOglasa()
                                         )
                                 )
                         );
@@ -101,5 +104,27 @@ public class UserListingsActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.accSignIn:
+                startActivity(new Intent(UserListingsActivity.this, LoginActivity.class));
+                break;
+            case R.id.accSignUp:
+                startActivity(new Intent(UserListingsActivity.this, RegisterActivity.class));
+                break;
+            case R.id.accSignOut:
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+                break;
+            case R.id.myListings:
+                Intent i = new Intent(UserListingsActivity.this, UserListingsActivity.class);
+                startActivity(i);
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

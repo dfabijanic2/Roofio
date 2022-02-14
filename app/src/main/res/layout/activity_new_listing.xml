@@ -25,13 +25,11 @@
 
     <Spinner
         android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="200dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -40,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/open_sans"
         android:text="Kategorija"
         android:textSize="18sp"
@@ -51,35 +49,35 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="25dp"
         android:fontFamily="@font/open_sans"
         android:text="Status"
         android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/categorySpinner"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <Spinner
         android:id="@+id/spinnerStatus"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        android:layout_marginStart="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/categorySpinner"
+        app:layout_constraintStart_toEndOf="@+id/categorySpinner"
+        app:layout_constraintTop_toTopOf="@+id/categorySpinner" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imagesRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAddImages" />
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,6 +91,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTitle"
+            android:drawableLeft="@drawable/ic_title"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
@@ -101,6 +102,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -115,12 +117,16 @@
             android:id="@+id/newDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_description"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:inputType="text"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -135,6 +141,9 @@
             android:id="@+id/newSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_size"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:inputType="numberDecimal"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -147,6 +156,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:hint="Broj soba"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -154,6 +164,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newNumRoom"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_num_room_grey"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
             android:inputType="numberDecimal"/>
@@ -167,6 +180,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:hint="Broj etaža"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
@@ -175,6 +189,9 @@
             android:id="@+id/newNumEtaza"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_etaya"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:inputType="number"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -187,6 +204,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:hint="Namještenost"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
@@ -194,6 +212,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newFurniture"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_furniture"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:fontFamily="@font/open_sans" />
@@ -206,6 +227,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Balkon/Lođa/Terasa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -215,6 +237,9 @@
             android:id="@+id/newBalkonLoda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_balkonloda"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:inputType="text"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -226,6 +251,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Godina izgradnje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +260,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newYearBuild"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_calendar_grey"
+            android:gravity="center_vertical"
             android:inputType="number"
+            android:drawablePadding="10dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -246,6 +275,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Godina zadnje renovacije"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -255,6 +285,9 @@
             android:id="@+id/newYearRenovation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar_grey"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:inputType="number"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -266,6 +299,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Energetski razred"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -275,6 +309,9 @@
             android:id="@+id/newEnergyLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_energy"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:inputType="text"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -286,6 +323,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Lokacija"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -294,6 +332,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newLocation"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_location_grey_new"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:fontFamily="@font/open_sans" />
@@ -307,6 +348,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:hint="Cijena (u eurima)"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
@@ -316,6 +358,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_euro_grey"
+            android:gravity="center_vertical"
             android:inputType="numberDecimal"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -338,15 +383,15 @@
         android:id="@+id/btnAddImages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/open_sans"
-        android:textColor="@color/white"
         android:backgroundTint="@color/teal_700"
-
+        android:drawableLeft="@drawable/ic_images_search"
+        android:fontFamily="@font/open_sans"
         android:text="Dodaj slike"
-        app:layout_constraintStart_toEndOf="@+id/categorySpinner"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.roofio.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PropertyDetails {
@@ -21,12 +22,13 @@ public class PropertyDetails {
     String BakonLodaTerasa;
     String Namjestenost;
     String Email;
+    String VrijemeKreiranjaOglasa;
 
 
     public PropertyDetails() {
     }
 
-    public PropertyDetails(String key, String naziv, String kategorija, String status, String oglasivac, String opisOglasa, List<String> slike, Double cijena, String lokacija, Double brojSoba, Integer stambenaPovrsina, Integer brojEtaza, Integer godinaIzgradnje, Integer godinaZadnjeRenovacije, String energetskiRazred, String bakonLodaTerasa, String namjestenost, String email) {
+    public PropertyDetails(String key, String naziv, String kategorija, String status, String oglasivac, String opisOglasa, List<String> slike, Double cijena, String lokacija, Double brojSoba, Integer stambenaPovrsina, Integer brojEtaza, Integer godinaIzgradnje, Integer godinaZadnjeRenovacije, String energetskiRazred, String bakonLodaTerasa, String namjestenost, String email, String vrijemeKreiranjaOglasa) {
         Key = key;
         Naziv = naziv;
         Kategorija = kategorija;
@@ -45,10 +47,15 @@ public class PropertyDetails {
         BakonLodaTerasa = bakonLodaTerasa;
         Namjestenost = namjestenost;
         Email = email;
+        VrijemeKreiranjaOglasa = LocalDateTime.now().toString();
     }
 
     public String getKey() {
         return Key;
+    }
+
+    public LocalDateTime getVrijemeKreiranjaOglasa() {
+        return LocalDateTime.parse(VrijemeKreiranjaOglasa);
     }
 
     public PropertyDetails setKey(String key) {

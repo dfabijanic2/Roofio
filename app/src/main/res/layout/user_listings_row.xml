@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutUserListings"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:padding="4dp"
     android:outlineAmbientShadowColor="#877777">
 
     <ImageView
         android:id="@+id/uaImage"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,6 +25,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/teal_700"
         android:src="@drawable/ic_baseline_delete_24"
@@ -36,6 +39,7 @@
     <ImageButton
         android:id="@+id/btnUpdateListing"
         android:layout_width="40dp"
+        android:layout_marginTop="8dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_button"
@@ -52,7 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Lokacija"
-        android:textAlignment="center"
+        android:drawableLeft="@drawable/ic_location_grey_new"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center_vertical"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/uaImage"
         app:layout_constraintHorizontal_bias="0.044"
@@ -66,6 +72,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="Cijena"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/open_sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uaNumRoom" />
 
@@ -73,9 +82,13 @@
         android:id="@+id/uaStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="#80737373"
+        android:fontFamily="@font/open_sans"
+        android:padding="8dp"
         android:text="Status"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/uaImage"
         app:layout_constraintTop_toTopOf="@+id/uaImage" />
 
@@ -85,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
         android:text="Naziv"
         app:layout_constraintStart_toStartOf="@+id/uaImage"
         app:layout_constraintTop_toBottomOf="@+id/uaImage" />
@@ -93,9 +107,15 @@
         android:id="@+id/uaNumRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="#80737373"
+        android:fontFamily="@font/open_sans"
+        android:padding="8dp"
+        android:drawableLeft="@drawable/ic_num_room"
+        android:gravity="center_vertical"
         android:text="Broj soba"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/uaImage"
         app:layout_constraintEnd_toEndOf="@+id/uaImage" />
 

@@ -11,11 +11,11 @@
             <item
                 android:id="@+id/accSignIn"
                 app:showAsAction="ifRoom"
-                android:title="Sign In" />
+                android:title="Prijavi se" />
             <item
                 android:id="@+id/accSignUp"
                 app:showAsAction="ifRoom"
-                android:title="Sign Up" />
+                android:title="Registriraj se" />
         </menu>
     </item>
 

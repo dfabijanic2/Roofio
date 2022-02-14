@@ -18,6 +18,8 @@ import com.example.roofio.R;
 import com.example.roofio.models.Category;
 import com.example.roofio.models.PropertyInfo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ListingsByCategoryAdapter extends RecyclerView.Adapter<ListingsByCategoryAdapter.ListingsByCategoryViewHolder> {
@@ -49,6 +51,7 @@ public class ListingsByCategoryAdapter extends RecyclerView.Adapter<ListingsByCa
         holder.name.setText(listingsByCategoryList.get(position).getNaziv());
         holder.status.setText(listingsByCategoryList.get(position).getStatus().toString());
         holder.numRoom.setText(listingsByCategoryList.get(position).getBrojSoba().toString());
+        holder.date.setText(LocalDateTime.parse(listingsByCategoryList.get(position).getVrijemeKreiranjaOglasa()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
         Glide.with(context).load(listingsByCategoryList.get(position).getSlika()).into(holder.featuredImage);
     }
 
@@ -59,7 +62,7 @@ public class ListingsByCategoryAdapter extends RecyclerView.Adapter<ListingsByCa
 
     public class ListingsByCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView location, price, name, status, numRoom;
+        TextView location, price, name, status, numRoom, date;
         ImageView featuredImage;
 
         public ListingsByCategoryViewHolder(@NonNull View itemView) {
@@ -71,6 +74,7 @@ public class ListingsByCategoryAdapter extends RecyclerView.Adapter<ListingsByCa
             status = itemView.findViewById(R.id.statusViewText);
             numRoom = itemView.findViewById(R.id.numRoomTextVIew);
             featuredImage = itemView.findViewById(R.id.featureImage);
+            date = itemView.findViewById(R.id.dateTextView);
 
             itemView.setOnClickListener(this);
 

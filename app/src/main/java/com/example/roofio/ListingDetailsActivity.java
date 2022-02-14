@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +60,7 @@ public class ListingDetailsActivity extends AppCompatActivity {
     TextView yearRenovation;
     TextView energyLevel;
     TextView location;
+    TextView dateCreated;
     Button btnContact;
 
     String to;
@@ -89,6 +93,7 @@ public class ListingDetailsActivity extends AppCompatActivity {
         energyLevel = (TextView)findViewById(R.id.energLevel);
         desc = (TextView)findViewById(R.id.descDetail);
         location = (TextView)findViewById(R.id.locationDetail);
+        dateCreated = (TextView)findViewById(R.id.dateCreated);
         btnContact = (Button)findViewById(R.id.btnContact);
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -152,6 +157,8 @@ public class ListingDetailsActivity extends AppCompatActivity {
                         mViewPagerAdapter.notifyDataSetChanged();
                         category.setText(codeListManager.GetCategoryByKey(property.getKategorija()).getNaziv());
                         size.setText(property.getStambenaPovrsina().toString());
+                        String dt = LocalDateTime.parse(property.getVrijemeKreiranjaOglasa()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss"));
+                        dateCreated.setText(dt);
 
 
                         database.child("Users").child(property.getOglasivac()).addValueEventListener(new ValueEventListener() {
@@ -185,5 +192,27 @@ public class ListingDetailsActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.accSignIn:
+                startActivity(new Intent(ListingDetailsActivity.this, LoginActivity.class));
+                break;
+            case R.id.accSignUp:
+                startActivity(new Intent(ListingDetailsActivity.this, RegisterActivity.class));
+                break;
+            case R.id.accSignOut:
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+                break;
+            case R.id.myListings:
+                Intent i = new Intent(ListingDetailsActivity.this, UserListingsActivity.class);
+                startActivity(i);
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,13 +5,19 @@
         android:id="@+id/myListings"
         android:icon="@drawable/ic_home"
         app:showAsAction="ifRoom"
-        android:title="Messages">
+        android:title="Moje nekretnine">
     </item>
+    <item
+        android:id="@+id/accProfile"
+        android:icon="@drawable/ic_account"
+        app:showAsAction="never"
+        android:title="Profil"/>
     <item
         android:id="@+id/accSignOut"
         android:icon="@drawable/ic_account"
         app:showAsAction="never"
         android:title="Odjavi se"/>
+
 
 
 </menu>

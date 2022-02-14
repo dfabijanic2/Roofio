@@ -1,6 +1,8 @@
 package com.example.roofio.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class PropertyInfo {
     String Key;
@@ -12,11 +14,12 @@ public class PropertyInfo {
     String Lokacija;
     Double BrojSoba;
     String Slika;
+    String VrijemeKreiranjaOglasa;
 
     public PropertyInfo() {
     }
 
-    public PropertyInfo(String key, String naziv, String kategorija, String status, Double cijena, String lokacija, Double brojSoba, String slika, Integer statusId) {
+    public PropertyInfo(String key, String naziv, String kategorija, String status, Double cijena, String lokacija, Double brojSoba, String slika, Integer statusId, String vrijemeKreiranjaOglasa) {
         Key = key;
         Naziv = naziv;
         Kategorija = kategorija;
@@ -26,6 +29,15 @@ public class PropertyInfo {
         BrojSoba = brojSoba;
         Slika = slika;
         StatusId = statusId;
+        VrijemeKreiranjaOglasa = vrijemeKreiranjaOglasa;
+    }
+
+    public String getVrijemeKreiranjaOglasa() {
+        return VrijemeKreiranjaOglasa;
+    }
+
+    public void setVrijemeKreiranjaOglasa(String vrijemeKreiranjaOglasa) {
+        VrijemeKreiranjaOglasa = vrijemeKreiranjaOglasa;
     }
 
     public Integer getStatusId() {
@@ -98,5 +110,18 @@ public class PropertyInfo {
 
     public void setSlike(String slika) {
         Slika = slika;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PropertyInfo that = (PropertyInfo) o;
+        return Key.equals(that.Key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Key);
     }
 }

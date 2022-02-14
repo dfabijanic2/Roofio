@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,17 +28,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
         android:background="#80737373"
-        android:drawableLeft="@drawable/ic_location_foreground"
-        android:fontFamily="@font/open_sans"
+        android:drawableLeft="@drawable/ic_location_grey"
         android:gravity="center_vertical"
+        android:fontFamily="@font/open_sans"
         android:padding="8dp"
+        android:layout_marginTop="16dp"
         android:text="Lokacija"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-        app:layout_constraintStart_toStartOf="@+id/viewPager" />
+        app:layout_constraintStart_toStartOf="@+id/viewPager"
+        app:layout_constraintTop_toTopOf="@+id/viewPager" />
 
     <TextView
         android:id="@+id/priceDetail"
@@ -70,22 +76,43 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
             android:text="Opis"
+            android:textSize="20dp"
             android:textColor="#909090" />
 
     </ScrollView>
 
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/ScrollView01"
+        android:layout_width="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/Title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans"
+        android:text="Osnove informacije"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScrollView01" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
         android:text="Vrsta nekretnine: "
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ScrollView01" />
+        app:layout_constraintTop_toBottomOf="@+id/Title2" />
 
 
     <TextView
@@ -93,19 +120,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans"
         android:text="Vrsta"
         android:textColor="#909090"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/ScrollView01" />
+        app:layout_constraintTop_toBottomOf="@+id/Title2" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Stambena površina (u m\u00b2): "
@@ -131,7 +158,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Broj soba"
@@ -149,7 +176,7 @@
         android:fontFamily="@font/open_sans"
         android:text="Naziv"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
@@ -170,7 +197,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Broj etaža: "
@@ -192,12 +219,21 @@
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/numDetail" />
 
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/numEtazaDewtail"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans"
         android:text="Namještenost: "
         android:textColor="@android:color/black"
@@ -210,7 +246,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans"
         android:text="namjestenost"
         android:textColor="#909090"
@@ -222,7 +258,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Balkon/Lođa/Terasa: "
@@ -244,12 +280,22 @@
         app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/furnitureDetail" />
 
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans"
         android:text="Godina izgradnje: "
         android:textColor="@android:color/black"
@@ -262,7 +308,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans"
         android:text="godina izgranje"
         android:textColor="#909090"
@@ -274,7 +320,7 @@
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Godina zadnje renovacije: "
@@ -300,7 +346,7 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Energetski razred: "
@@ -322,12 +368,39 @@
         app:layout_constraintStart_toEndOf="@+id/textView26"
         app:layout_constraintTop_toBottomOf="@+id/yearRenovationDetail" />
 
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Datum objave: "
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/dateCreated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans"
+        android:text="datum objave"
+        android:textColor="#909090"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/energLevel" />
+
     <Button
         android:id="@+id/btnContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/teal_700"
         android:text="Kontakt"
         android:textColor="@color/white"
@@ -336,7 +409,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/energLevel" />
+        app:layout_constraintTop_toBottomOf="@+id/dateCreated" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

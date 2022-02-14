@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roofio.Listeners.OnFirebaseDataRetrievedListener;
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
     DatabaseReference database;
 
     Button btnAddListing;
+
+    private EditText searchQuery;
 
 
     @Override
@@ -95,6 +101,22 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
             }
         });
 
+        searchQuery = findViewById(R.id.searchQuery);
+
+        searchQuery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEND)
+                {
+                    Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                    i.putExtra("searchText", searchQuery.getText().toString());
+                    startActivity(i);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -128,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
             case R.id.accSignOut:
                 FirebaseAuth.getInstance().signOut();
                 recreate();
+                break;
+            case R.id.accProfile:
+                startActivity(new Intent(MainActivity.this, UserAccountActivity .class));
                 break;
             case R.id.myListings:
                 Intent i = new Intent(MainActivity.this, UserListingsActivity.class);
@@ -164,7 +189,8 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
                                                 p.getLokacija(),
                                                 p.getBrojSoba(),
                                                 p.getSlike() != null && p.getSlike().size() > 0 ? p.getSlike().get(0) : "",
-                                                p.getStatus()
+                                                p.getStatus(),
+                                                p.getVrijemeKreiranjaOglasa()
                                         )
                                 )
                         );

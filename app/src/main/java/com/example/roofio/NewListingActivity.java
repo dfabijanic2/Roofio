@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -116,7 +117,7 @@ public class NewListingActivity extends AppCompatActivity {
 
         ArrayAdapter<Category> adapter= new ArrayAdapter<Category>(this, R.layout.spinner_item, codeListManager.getCategories());
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
 
         spinnerCategories.setAdapter(adapter);
 
@@ -136,7 +137,7 @@ public class NewListingActivity extends AppCompatActivity {
 
         ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.spinner_item, codeListManager.getStatuses());
 
-        adapterStatus.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapterStatus.setDropDownViewResource(R.layout.spinner_item);
 
         spinnerStatus.setAdapter(adapterStatus);
 
@@ -168,7 +169,7 @@ public class NewListingActivity extends AppCompatActivity {
         btnAddListingFinal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAllFieldsChecked = CheckAllFields();
+                CheckAllFields();
                 String id = extras != null ? extras.getString("listingKey") :  database.child("Nekretnine").push().getKey();
                 StorageReference ImageFolder = FirebaseStorage.getInstance().getReference();
                 urlStrings = new ArrayList<>();
@@ -235,45 +236,63 @@ public class NewListingActivity extends AppCompatActivity {
         database.child("Nekretnine").child(id).setValue(newPropery);
     }
 
-    private boolean CheckAllFields() {
+    private void CheckAllFields() {
+        isAllFieldsChecked = true;
         if (newTitle.length() == 0) {
             newTitle.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newDesc.length() == 0) {
             newDesc.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newSize.length() == 0) {
             newSize.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newLocation.length() == 0) {
             newLocation.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newPrice.length() == 0) {
             newPrice.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newBalkonLoda.length() == 0) {
             newBalkonLoda.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newEnergyLevel.length() == 0) {
             newEnergyLevel.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newFurniture.length() == 0) {
             newFurniture.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
 
         }
         if (newNumEtaza.length() == 0) {
             newNumEtaza.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newNumRoom.length() == 0) {
             newNumRoom.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newYearBuild.length() == 0) {
             newYearBuild.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (newYearRenovation.length() == 0) {
             newYearRenovation.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
-        return true;
+        if(ImageList.size() == 0)
+        {
+            Toast.makeText(NewListingActivity.this, "Odaberite barem jednu sliku", Toast.LENGTH_LONG).show();
+            isAllFieldsChecked = false;
+        }
+
 
     }
 
@@ -351,5 +370,26 @@ public class NewListingActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.accSignIn:
+                startActivity(new Intent(NewListingActivity.this, LoginActivity.class));
+                break;
+            case R.id.accSignUp:
+                startActivity(new Intent(NewListingActivity.this, RegisterActivity.class));
+                break;
+            case R.id.accSignOut:
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+                break;
+            case R.id.myListings:
+                Intent i = new Intent(NewListingActivity.this, UserListingsActivity.class);
+                startActivity(i);
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,5 +1,8 @@
 package com.example.roofio.models;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 public class Property {
@@ -20,6 +23,7 @@ public class Property {
     String EnergetskiRazred;
     String BakonLodaTerasa;
     String Namjestenost;
+    String VrijemeKreiranjaOglasa;
 
 
     public Property() {
@@ -42,7 +46,15 @@ public class Property {
         EnergetskiRazred = energetskiRazred;
         BakonLodaTerasa = bakonLodaTerasa;
         Namjestenost = namjestenost;
+        VrijemeKreiranjaOglasa = LocalDateTime.now().toString();
+    }
 
+    public String getVrijemeKreiranjaOglasa() {
+        return VrijemeKreiranjaOglasa;
+    }
+
+    public void setVrijemeKreiranjaOglasa(String vrijemeKreiranjaOglasa) {
+        VrijemeKreiranjaOglasa = vrijemeKreiranjaOglasa;
     }
 
     public String getKey() {
