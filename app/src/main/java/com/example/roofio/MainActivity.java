@@ -32,7 +32,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFirebaseDataRetrievedListener {
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
         recentlyListedRecycleView.setLayoutManager(rlLayoutManager);
         recentlyListedAdapter = new RecentlyListedAdapter(MainActivity.this, recentlyListedList);
         recentlyListedRecycleView.setAdapter(recentlyListedAdapter);
-
 
         categoryList = new ArrayList<>();
         categoryRecycleView = findViewById(R.id.categoryRecycler);
@@ -171,6 +173,10 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
 
     }
 
+    Comparator<PropertyInfo> comparatorDesc = (l1, l2) -> {
+        return LocalDateTime.parse(l2.getVrijemeKreiranjaOglasa()).compareTo(LocalDateTime.parse(l1.getVrijemeKreiranjaOglasa()));
+    };
+
     private void getNekretnine(){
         database.child("Nekretnine").limitToLast(10)
                 .addValueEventListener(new ValueEventListener() {
@@ -194,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements OnFirebaseDataRet
                                         )
                                 )
                         );
+                        Collections.sort(recentlyListedList, comparatorDesc);
                         recentlyListedAdapter.setProperties(recentlyListedList);
                         recentlyListedAdapter.notifyDataSetChanged();
 

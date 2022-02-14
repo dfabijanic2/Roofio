@@ -27,6 +27,7 @@ public class UserAccountActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private Button update;
+    private boolean isAllFieldsChecked;
 
     FirebaseUser currentUser;
     DatabaseReference dbUser;
@@ -65,7 +66,8 @@ public class UserAccountActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckAllFields())
+                CheckAllFields();
+                if (isAllFieldsChecked)
                 {
                     updateUser();
                 }
@@ -87,17 +89,20 @@ public class UserAccountActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private boolean CheckAllFields() {
+    private void CheckAllFields() {
+        isAllFieldsChecked = true;
         if (email.length() == 0) {
             email.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (firstName.length() == 0) {
             firstName.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (lastName.length() == 0) {
             lastName.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
-        return true;
 
     }
 }

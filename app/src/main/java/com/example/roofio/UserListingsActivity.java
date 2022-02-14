@@ -45,7 +45,6 @@ public class UserListingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_listings);
 
-
         database = FirebaseDatabase.getInstance().getReference();
         codeListManager = CodeListManager.getInstance();
 
@@ -117,7 +116,7 @@ public class UserListingsActivity extends AppCompatActivity {
                 break;
             case R.id.accSignOut:
                 FirebaseAuth.getInstance().signOut();
-                recreate();
+                startActivity(new Intent(UserListingsActivity.this, MainActivity.class));
                 break;
             case R.id.myListings:
                 Intent i = new Intent(UserListingsActivity.this, UserListingsActivity.class);

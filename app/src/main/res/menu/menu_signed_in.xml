@@ -11,7 +11,7 @@
         android:id="@+id/accProfile"
         android:icon="@drawable/ic_account"
         app:showAsAction="never"
-        android:title="Profil"/>
+        android:title="Moj profil"/>
     <item
         android:id="@+id/accSignOut"
         android:icon="@drawable/ic_account"

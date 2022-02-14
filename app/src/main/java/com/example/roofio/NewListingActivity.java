@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.snapshot.Index;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -74,6 +75,9 @@ public class NewListingActivity extends AppCompatActivity {
     private ArrayList<String> urlStrings;
     private List<Image> ImageList = new ArrayList<>();
 
+    Spinner spinnerStatus;
+    Spinner spinnerCategories;
+
     private boolean isAllFieldsChecked = false;
 
     Property prop = new Property();
@@ -88,7 +92,7 @@ public class NewListingActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance().getReference();
         codeListManager = CodeListManager.getInstance();
-        Spinner spinnerCategories = findViewById(R.id.categorySpinner);
+        spinnerCategories = findViewById(R.id.categorySpinner);
 
         imageRecyclerView = findViewById(R.id.imagesRecyclerView);
         RecyclerView.LayoutManager rlLayoutManager = new LinearLayoutManager(NewListingActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -112,9 +116,6 @@ public class NewListingActivity extends AppCompatActivity {
         newPrice = (EditText)findViewById(R.id.newPrice);
 
 
-
-
-
         ArrayAdapter<Category> adapter= new ArrayAdapter<Category>(this, R.layout.spinner_item, codeListManager.getCategories());
 
         adapter.setDropDownViewResource(R.layout.spinner_item);
@@ -133,7 +134,7 @@ public class NewListingActivity extends AppCompatActivity {
             }
         });
 
-        Spinner spinnerStatus = findViewById(R.id.spinnerStatus);
+        spinnerStatus = findViewById(R.id.spinnerStatus);
 
         ArrayAdapter<Status> adapterStatus= new ArrayAdapter<Status>(this, R.layout.spinner_item, codeListManager.getStatuses());
 
@@ -234,6 +235,9 @@ public class NewListingActivity extends AppCompatActivity {
     private void saveListing(String id){
         Property newPropery = new Property(newTitle.getText().toString(), Integer.parseInt(categorySelected.getKey()), Integer.parseInt(statusSelected.getKey()), FirebaseAuth.getInstance().getCurrentUser().getUid(), newDesc.getText().toString(), urlStrings, Double.parseDouble(newPrice.getText().toString()), newLocation.getText().toString(), Double.parseDouble(newNumRoom.getText().toString()), Integer.parseInt(newSize.getText().toString()), Integer.parseInt(newNumEtaza.getText().toString()), Integer.parseInt(newYearBuild.getText().toString()), Integer.parseInt(newYearRenovation.getText().toString()), newEnergyLevel.getText().toString(), newBalkonLoda.getText().toString(), newFurniture.getText().toString());
         database.child("Nekretnine").child(id).setValue(newPropery);
+        Toast.makeText(NewListingActivity.this, "Oglas uspješno kreiran", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(NewListingActivity.this, UserListingsActivity.class);
+        startActivity(i);
     }
 
     private void CheckAllFields() {
@@ -356,6 +360,8 @@ public class NewListingActivity extends AppCompatActivity {
                 newEnergyLevel.setText(prop.getEnergetskiRazred());
                 newLocation.setText(prop.getLokacija());
                 newPrice.setText(String.format("%.2f", prop.getCijena()));
+                spinnerStatus.setSelection(codeListManager.getStatuses().indexOf(codeListManager.GetStatusByKey(prop.getStatus())));
+                spinnerCategories.setSelection(codeListManager.getCategories().indexOf(codeListManager.GetCategoryByKey(prop.getKategorija())));
 
                 ImageList = prop.getSlike() != null ? prop.getSlike().stream().map(s -> new Image(Uri.parse(s), false)).collect(Collectors.toList()) : new ArrayList<>();
 

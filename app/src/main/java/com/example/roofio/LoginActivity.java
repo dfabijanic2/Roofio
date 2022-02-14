@@ -1,5 +1,6 @@
 package com.example.roofio;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
-                isAllFieldsChecked = CheckAllFields();
+                CheckAllFields();
                 if (isAllFieldsChecked) {
                     loginUser(txt_email, txt_password);
                 }
@@ -49,17 +51,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean CheckAllFields() {
+    private void CheckAllFields() {
+        isAllFieldsChecked = true;
         if (email.length() == 0) {
             email.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         if (password.length() == 0) {
             password.setError("Ovo polje je obavezano");
+            isAllFieldsChecked = false;
         }
         else if (password.length() < 6) {
             password.setError("Lozinka mora sadržavati barem 6 znakova");
+            isAllFieldsChecked = false;
         }
-        return true;
 
     }
     private void loginUser(String txt_email, String txt_password) {
@@ -70,6 +75,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Prijava uspješna", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, "Prijava neuspješna", Toast.LENGTH_SHORT).show();
             }
         });
     }

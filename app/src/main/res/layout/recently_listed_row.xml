@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:id="@+id/layoutRecentlyListed"
+
     android:layout_height="wrap_content">
 
     <ImageView
@@ -19,9 +20,11 @@
 
     <TextView
         android:id="@+id/locationTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:minLines="2"
+        android:lines="2"
         android:drawableLeft="@drawable/ic_location_grey_new"
         android:fontFamily="@font/open_sans"
         android:gravity="center_vertical"
@@ -33,14 +36,15 @@
 
     <TextView
         android:id="@+id/priceTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:fontFamily="@font/open_sans"
         android:text="Cijena"
-        android:drawableRight="@drawable/ic_euro_grey"
+        android:paddingLeft="2dp"
+        android:drawableLeft="@drawable/ic_euro_grey"
         android:gravity="center_vertical"
-        android:padding="8dp"
+
         android:textColor="#717171"
         app:layout_constraintEnd_toEndOf="@+id/locationTextView"
         app:layout_constraintStart_toStartOf="@+id/locationTextView"
